@@ -168,10 +168,6 @@ pub fn parse_path_style(uri_path: &str) -> Result<S3Path, ParseS3PathError> {
         Some((bucket, key)) => (bucket, Some(key)),
     };
 
-    if !check_bucket_name(bucket) {
-        return Err(ParseS3PathError::InvalidBucketName);
-    }
-
     let Some(key) = key else { return Ok(S3Path::bucket(bucket)) };
 
     if !check_key(key) {
